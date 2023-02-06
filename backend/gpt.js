@@ -1,0 +1,1 @@
+// ToDo create the fetch calls to the API for gpt3
