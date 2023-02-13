@@ -5,3 +5,5 @@ This is the repo for our CS194 project. This repo will consist of two main parts
 Larsen Weigle 
 
 Andrew Mangan
+
+Isabella Jordan
