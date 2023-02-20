@@ -10,10 +10,59 @@ import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
     
+    let buttonStackView = UIStackView()
+    let askButton = UIButton()
+    let otherButton1 = UIButton()
+    let otherButton2 = UIButton()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        setupUI()
     }
+
+    func setupUI() {
+        // Create button stack view
+        buttonStackView.axis = .horizontal
+        buttonStackView.distribution = .equalSpacing
+        buttonStackView.spacing = 20
+        view.addSubview(buttonStackView)
+        
+        // Set up button stack view constraints
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        buttonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        
+        // Create and add ask button to stack view
+        askButton.setTitle("Ask Davinci", for: .normal)
+        askButton.titleLabel?.font = UIFont.systemFont(ofSize: 24, weight: .regular)
+        askButton.setTitleColor(.black, for: .normal)
+        askButton.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        askButton.layer.cornerRadius = 10
+        askButton.addTarget(self, action: #selector(displayInputView), for: .touchUpInside)
+        buttonStackView.addArrangedSubview(askButton)
+        
+        // Create and add other buttons to stack view
+        otherButton1.setTitle("Button 1", for: .normal)
+        otherButton1.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        otherButton1.setTitleColor(.black, for: .normal)
+        otherButton1.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        otherButton1.layer.cornerRadius = 10
+        buttonStackView.addArrangedSubview(otherButton1)
+        
+        otherButton2.setTitle("Button 2", for: .normal)
+        otherButton2.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        otherButton2.setTitleColor(.black, for: .normal)
+        otherButton2.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
+        otherButton2.layer.cornerRadius = 10
+        buttonStackView.addArrangedSubview(otherButton2)
+    }
+    
+    @objc func displayInputView() {
+        askButton.isHidden = true
+        otherButton1.isHidden = true
+        otherButton2.isHidden = true
+    }
+
     
     // MARK: - Conversation Handling
     
