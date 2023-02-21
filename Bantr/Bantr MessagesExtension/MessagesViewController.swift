@@ -10,6 +10,21 @@ import Messages
 
 class MessagesViewController: MSMessagesAppViewController {
     
+    @IBOutlet var mainView: UIView!
+    @IBOutlet weak var sendQueryButton: UIButton!
+    
+    @IBAction func sendQueryAction(_ sender: Any) {
+        print("sendQueryAction")
+        let layout = MSMessageTemplateLayout()
+        layout.caption = "This worked"
+        let message = MSMessage()
+        
+        message.layout = layout
+        self.activeConversation?.insert(message) { error in 
+            self.didStartSending(message, conversation: self.activeConversation!)    
+        }
+    }
+    
     let buttonStackView = UIStackView()
     let askButton = UIButton()
     let otherButton1 = UIButton()
@@ -17,7 +32,7 @@ class MessagesViewController: MSMessagesAppViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        //setupUI()
     }
 
     func setupUI() {
@@ -38,8 +53,9 @@ class MessagesViewController: MSMessagesAppViewController {
         askButton.setTitleColor(.black, for: .normal)
         askButton.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1)
         askButton.layer.cornerRadius = 10
-        askButton.addTarget(self, action: #selector(displayInputView), for: .touchUpInside)
+        //askButton.addTarget(self, action: #selector(sendQuery), for: .touchUpInside)
         buttonStackView.addArrangedSubview(askButton)
+
         
         // Create and add other buttons to stack view
         otherButton1.setTitle("Button 1", for: .normal)
@@ -56,6 +72,7 @@ class MessagesViewController: MSMessagesAppViewController {
         otherButton2.layer.cornerRadius = 10
         buttonStackView.addArrangedSubview(otherButton2)
     }
+
     
     @objc func displayInputView() {
         askButton.isHidden = true
