@@ -1,77 +1,90 @@
-import { 
-  Button, 
-  Paper,
-  Container,
-  Grid,
-  Typography, 
-  Card, 
-  CardMedia,
-  CardContent,
-  CardActionArea,
-} from '@material-ui/core'
-import Link from 'next/link'
+import { Layout, Text, Page } from '@vercel/examples-ui'
+//import from material ui
+import { Box, Button, Card, Chip, Container, Grid, makeStyles, MenuItem, TextField, Typography } from '@material-ui/core'
 import { Chat } from '../components/Chat'
+import { useEffect, useState } from 'react';
+import Header from '../components/Header';
+import {Stack} from '@mui/material';
+import Link from 'next/link';
 
+// create a mui theme 
+// 
+const useStyles = makeStyles({
+  root: {
+    background: "linear-gradient(45deg, #715AFF 5%, #50E3C2 90%)",
+    minWidth: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  },
+  card: {
+    maxWidth: "60%",
+    minWidth: "60%",
+    // add no background
+    background: "transparent",
+    // add no border
+    border: "none",
+    minHeight: "60vh",
+    display: "flex",
+  }
+});
 
 function Home() {
+  const classes = useStyles();
+
+  // PromptStates
+
   return (
-    <Container>
-        <Typography component="h1" variant="h3" align="center">
-          Bantr.AI
-        </Typography>
-        <Typography component="h1" variant="h5" align="center">
-          Create, query, and share novel chatbots with Bantr, an easy to use framework that ties directly into state of the art LLMs for the best chatbot expereince!
-        </Typography>
-      <Grid container spacing={2} >
-        <Grid item xs={12} sm={6} md={6} lg={6} >
-          {/* Adjust the background color of the page */}
-          {/* <Paper style={{backgroundColor: '#f5f5f5'}}> */}
-            {/* add a title to the page using material ui */}
-
-            {/* add a button to the index page to create a new chatbot */}
-            <Link href="/create">
-              {/* create a centered button */}
-              <Button variant="contained" color="primary" style={{margin: 'auto'}}>
-                Chat Our Bot
-              </Button>
-            </Link>
-            {/* </Paper> */}
+    <div>
+      
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <Header />
         </Grid>
-        <Grid item xs={12} sm={6}md={6} lg={6}>
-          {/* <Paper style={{backgroundColor: '#f5f5f5'}}> */}
-
-            <Link href="/create">
-              <Button variant="outlined" color="primary" style={{margin: 'auto'}}>
-                Create a Chatbot
-              </Button>
-            </Link>
-              
-          {/* </Paper> */}
+        <Grid item xs={2}>
         </Grid>
+        <Grid alignItems="center" className={classes.root}>
+          <Box className={classes.card} style={{
+            display: "flex",
+            justifyContent: "center",
+            
+          }}>
+            <Stack spacing={2} direction="column" alignItems="center">
 
+            {/* have typography text be centered in card horizntally and vertically */}
+              <Typography variant="h1">
+                Bantr Ai
+              </Typography>
+              <Typography variant="h2">
+                Easily design a custom chatbot.
+              </Typography>
+              <Box>
+                <Link href='/create'>
+                  <Button variant="contained" color="primary" style={{
+                    marginRight: "10px"
+                  }}>
+                    Create a Bot
+                  </Button>
+                </Link>
+                <Link href='/create'>
+                  <Button variant="contained" color="secondary">
+                    Chat Now
+                  </Button>
+                </Link>
+              </Box>
+            </Stack>
+            
+          </Box>
+        </Grid>
+        <Grid item xs={2}>
+
+        </Grid>
       </Grid>
-        <Card sx={{ maxWidth: 345, m: 4 }}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image="../Assets/logo.jpg"
-              alt="logo"
-            />
-            {/* <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Lizard
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Lizards are a widespread group of squamate reptiles, with over 6,000
-                species, ranging across all continents except Antarctica
-              </Typography>
-            </CardContent> */}
-          </CardActionArea>
-        </Card>
-    </Container>
+    </div>
   )
 }
 
+Home.Layout = Layout
 
 export default Home
