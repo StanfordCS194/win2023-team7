@@ -46,9 +46,13 @@ export default async function handler(req: NextRequest) {
 
   // const messages = req.body.messages
   const messagesPrompt = generatePromptFromMessages(body.messages)
-  const defaultPrompt = `I am Friendly AI Assistant. \n\nThis is the conversation between AI Bot and a news reporter.\n\n${botName}: ${firstMessge}\n${userName}: ${messagesPrompt}\n${botName}: `
-  const finalPrompt = process.env.AI_PROMPT
-    ? `${process.env.AI_PROMPT}${messagesPrompt}\n${botName}: `
+  const botPrompt = body.prompt;
+  const defaultPrompt = `I am Friendly Stanford Administrator. \n\nThis is the conversation between me and a student.\n\n${botName}: ${firstMessge}\n${userName}: ${messagesPrompt}\n${botName}: `
+  console.log('== defaultPrompt ==', defaultPrompt);
+  console.log('== messagesPrompt ==', messagesPrompt);
+  console.log('== botPrompt ==', botPrompt);
+  const finalPrompt = botPrompt
+    ? `${botPrompt}${messagesPrompt}\n${botName}: `
     : defaultPrompt
 
   const payload = {
@@ -80,7 +84,23 @@ export default async function handler(req: NextRequest) {
     body: JSON.stringify(payload),
   })
 
-  const data = await response.json()
+  // only wait for 15 seconds on the response
+  const timeout = new Promise((resolve) => {
+    setTimeout(resolve, 15000, 'timeout')
+  })
+
+  const responsePromise = response.json()
+
+
+  const data = await Promise.race([timeout, responsePromise])
+
+  if (data === 'timeout') {
+    console.error('OpenAI API timeout')
+    return NextResponse.json({
+      text: 'ERROR with API integration. Timeout',
+    })
+  }
+  //const data = await response.json()
 
   if (data.error) {
     console.error('OpenAI API error: ', data.error)
