@@ -25,6 +25,7 @@ function Home() {
         </Container>
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
         <Button>Create Chatbot</Button>
+        <Chat />
 
       </section>
     </Page>
