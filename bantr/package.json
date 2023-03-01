@@ -9,8 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.4",
     "@vercel/analytics": "^0.1.6",
     "@vercel/examples-ui": "^1.0.4",
+    "material-ui": "^0.20.2",
     "next": "latest",
     "react": "latest",
     "react-cookie": "^4.1.1",
