@@ -44,7 +44,11 @@ const InputMessage = ({ input, setInput, sendMessage }: any) => (
   </div>
 )
 
-export function Chat() {
+export interface ChatProps {
+  prompt?: string
+}
+
+export function Chat({ prompt }: ChatProps) {
   const [messages, setMessages] = useState<Message[]>(initialMessages)
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -75,6 +79,7 @@ export function Chat() {
       },
       body: JSON.stringify({
         messages: last10messages,
+        prompt: prompt,
         user: cookie[COOKIE_NAME],
       }),
     })
@@ -92,7 +97,9 @@ export function Chat() {
 
   return (
     // add a message container that scolls
-    <div className="rounded-2xl border-zinc-100  lg:border lg:p-6">
+    //TODO: add a scroll to bottom button
+
+    <div className="border-black-100  lg:border lg:p-6 h-[calc(60vh)] overflow-y-auto ">
       {messages.map(({ message, who }, index) => (
         <ChatLine key={index} who={who} message={message} />
       ))}
@@ -112,3 +119,5 @@ export function Chat() {
     </div>
   )
 }
+
+
