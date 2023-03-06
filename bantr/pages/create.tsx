@@ -1,6 +1,7 @@
 import { Layout, Text, Page } from '@vercel/examples-ui'
 //import from material ui
-import { Button, Chip, Container, MenuItem, TextField, Typography } from '@material-ui/core'
+import { Button, Chip, Container, MenuItem, TextField, Typography, Grid } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles';
 import { Chat } from '../components/Chat'
 import { useEffect, useState } from 'react';
 
@@ -118,8 +119,31 @@ const Quirks = [
   }
 ];
 
+const useStyles = makeStyles({
+  root: {
+    background: "linear-gradient(45deg, #715AFF 5%, #50E3C2 90%)",
+    minWidth: "100%",
+    minHeight: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  },
+  card: {
+    maxWidth: "60%",
+    minWidth: "60%",
+    // add no background
+    background: "transparent",
+    // add no border
+    border: "none",
+    minHeight: "60vh",
+    display: "flex",
+  },
+});
+
 function Home() {
   const [prompt, setPrompt] = useState("");
+
+  const classes = useStyles();
 
   // PromptStates
   const [mood, setMood] = useState("");
@@ -152,62 +176,91 @@ function Home() {
 
   }, [mood, quirk, nationality, name, age]);
 
-
-
-
+  
   return (
-    <Page className="flex flex-col gap-12">
-      <section className="flex flex-col gap-6">
-        <Text variant="h1">Bantr AI</Text>
-        <Text className="text-zinc-600">
-          Create a personality for your chatbot and let it loose on the world.
-        </Text>
-      </section>
-      <section className="flex flex-col gap-6">
-        <Text variant="h2">Create a new chatbot</Text>
-        <Text className="text-zinc-600">
-          Select the personality of your chatbot and give it a name.
-        </Text>
-        <Typography variant="h6">Select a Mood: {mood} </Typography>
-        <Container>
-          {/* Andrew TODO: hook up the chips to state and calculate the prompt based on the selected chips */}
-          {Moods.map((option) => {
-            //TODO: make selected chip filled
-            // console.log('option', option)
-            // console.log('mood', mood)
-            // console.log(mood == option.value)
-            const isSelected = mood == option.value;
-            return (
-              <Chip id={option.label} label={option.label} onClick={() => handleMoodSelect(option)} variant={isSelected ? "filled" : "outlined" as any}/>
-            )
-          })}
-
-
-        </Container>
-        <Typography variant="h6">Select a Quirk: {quirk}</Typography>
-        <Container>
-          {/* Andrew TODO: hook up the chips to state and calculate the prompt based on the selected chips */}
-          {Quirks.map((option) => {
-           
-            return (  
-              <Chip id={option.label} label={option.label} onClick={() => setQuirk(option.value)} variant="outlined"/>
-            )
-          })}
-
-        </Container>
-        <Typography variant="h6">Select a Nationality</Typography>
-        <TextField id="outlined-basic" label="Nationality" variant="outlined" select defaultValue="" value={nationality} onChange={(e) => setNationality(e.target.value)}>
-          {Nationalities.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        <TextField id="outlined-basic" label="Custom Prompt" variant="outlined" value={prompt} onChange={(e) => setPrompt(e.target.value)} />
-        <Chat prompt={prompt}/>
-
-      </section>
+    <Page>
+      <div className={classes.root}>
+        <section className="flex flex-col gap-2" style={{textAlign: 'center', marginBottom: "32px" }}>
+          <Text variant="h1">Bantr AI</Text>
+            <Text className="text-zinc-600">
+              Create a personality for your chatbot and let it loose on the world.
+            </Text>
+        </section>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Container>
+              <section className="flex flex-col gap-6">
+                <Text variant="h2">Create a new chatbot</Text>
+                <Text className="text-zinc-600">
+                  Select the personality of your chatbot and give it a name.
+                </Text>
+                <Typography variant="h6">Select a Mood: {mood} </Typography>
+                <Container>
+                  {/* Andrew TODO: hook up the chips to state and calculate the prompt based on the selected chips */}
+                  {Moods.map((option) => {
+                    //TODO: make selected chip filled
+                    const isSelected = mood == option.value;
+                    return (
+                      <Chip
+                        key={option.label}
+                        id={option.label}
+                        label={option.label}
+                        onClick={() => handleMoodSelect(option)}
+                        variant={isSelected ? "filled" : "outlined" as any}
+                      />
+                    )
+                  })}
+                </Container>
+                <Typography variant="h6">Select a Quirk: {quirk}</Typography>
+                <Container>
+                  {/* Andrew TODO: hook up the chips to state and calculate the prompt based on the selected chips */}
+                  {Quirks.map((option) => {
+                    return (
+                      <Chip
+                        key={option.label}
+                        id={option.label}
+                        label={option.label}
+                        onClick={() => setQuirk(option.value)}
+                        variant="outlined"
+                      />
+                    )
+                  })}
+                </Container>
+                <Typography variant="h6">Select a Nationality</Typography>
+                <Container>
+                <TextField
+                  id="outlined-basic"
+                  label="Nationality"
+                  variant="outlined"
+                  select
+                  defaultValue=""
+                  value={nationality}
+                  onChange={(e) => setNationality(e.target.value)}
+                >
+                  {Nationalities.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+                </Container>
+                <TextField
+                id="outlined-basic"
+                label="Custom Prompt"
+                variant="outlined"
+                value={prompt}
+                onChange={(e) => setPrompt(e.target.value)}
+              />
+              </section>
+            </Container>
+          </Grid>
+          <Grid item xs={6}>
+            <Container>
+              <Chat prompt={prompt}/>
+            </Container>
+          </Grid>
+        </Grid>
+      </div>
     </Page>
   )
 }
