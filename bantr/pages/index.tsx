@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import {Stack} from '@mui/material';
 import Link from 'next/link';
+import React from 'react';
 
 // create a mui theme 
 // 
@@ -70,6 +71,13 @@ function Home() {
                 <Link href='/create'>
                   <Button variant="contained" color="secondary">
                     Chat Now
+                  </Button>
+                </Link>
+                <Link href='/trending'>
+                  <Button variant="contained" color="primary" style={{
+                    marginLeft: "10px"
+                  }}>
+                    Trending Chats
                   </Button>
                 </Link>
               </Box>
