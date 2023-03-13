@@ -1,6 +1,7 @@
 import { Layout, Text, Page } from '@vercel/examples-ui'
 //import from material ui
 import { Box, Button, Card, Chip, Container, Grid, makeStyles, MenuItem, TextField, Typography } from '@material-ui/core'
+import { Chat } from '../components/Chat'
 import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import {Stack} from '@mui/material';
@@ -79,7 +80,6 @@ function Home() {
                     Trending Chats
                   </Button>
                 </Link>
-
               </Box>
             </Stack>
             

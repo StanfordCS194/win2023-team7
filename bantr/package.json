@@ -1,0 +1,39 @@
+{
+  "repository": "https://github.com/vercel/examples.git",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "@material-ui/core": "^4.12.4",
+    "@mui/material": "^5.11.11",
+    "@vercel/analytics": "^0.1.6",
+    "@vercel/examples-ui": "^1.0.4",
+    "dom-helpers": "^5.2.1",
+    "material-ui": "^0.20.2",
+    "next": "latest",
+    "react": "latest",
+    "react-cookie": "^4.1.1",
+    "react-dom": "latest",
+    "react-transition-group": "^4.4.5",
+    "react-wrap-balancer": "^0.1.5",
+    "styled-components": "^5.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^17",
+    "@types/react": "latest",
+    "@types/styled-components": "^5.1.26",
+    "autoprefixer": "^10.4.7",
+    "eslint": "^8.11.0",
+    "eslint-config-next": "^12.1.0",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24",
+    "typescript": "^4.7.3"
+  }
+}
