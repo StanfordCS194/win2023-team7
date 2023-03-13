@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Button } from '@material-ui/core'
+//import { Button } from '@material-ui/core'
+import { Button } from './Button'
 import { type Message, ChatLine, LoadingChatLine } from './ChatLine'
 import { useCookies } from 'react-cookie'
 
@@ -100,24 +101,31 @@ export function Chat({ prompt }: ChatProps) {
     //TODO: add a scroll to bottom button
     
     <div className="border-black-100  lg:border lg:p-6 h-[calc(60vh)] overflow-y-auto ">
-      {messages.length > 1 && (
+      {//messages.length > 1 && (
         /* TODO: make this clear button prettier */
-        <Button variant="contained" onClick={() => setMessages(initialMessages)}>
-          Clear
-        </Button>
-      )}
-      {messages.map(({ message, who }, index) => (
-        <ChatLine key={index} who={who} message={message} />
-      ))}
+        // <Button variant="contained" onClick={() => setMessages(initialMessages)}>
+        //   Clear
+        // </Button>
+      //)
+      }
+      {
+        messages.map(({ message, who }, index) => (
+          <ChatLine key={index} who={who} message={message} />
+        ))
+      }
       
 
-      {loading && <LoadingChatLine />}
+      {
+        loading && <LoadingChatLine />
+      }
 
-      {messages.length < 2 && (
-        <span className="mx-auto flex flex-grow text-gray-600 clear-both">
-          Type a message to start the conversation
-        </span>
-      )}
+      {
+        messages.length < 2 && (
+          <span className="mx-auto flex flex-grow text-gray-600 clear-both">
+            Type a message to start the conversation
+          </span>
+        )
+      }
       
       <InputMessage
         input={input}
