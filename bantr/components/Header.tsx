@@ -1,4 +1,4 @@
-import { AppBar, Button, Grid, Toolbar, Typography } from '@material-ui/core';
+import { AppBar, Button, Divider, Grid, Toolbar, Typography } from '@material-ui/core';
 import Link from 'next/link';
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
@@ -88,6 +88,11 @@ export default function Header() {
         <Link href='/create'>
               <Typography variant="h5">
                 Create
+              </Typography>
+            </Link>
+        <Link href='/trending'>
+              <Typography variant="h5" component="h2">
+                Trending
               </Typography>
             </Link>
       </Toolbar>
