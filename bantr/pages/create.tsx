@@ -3,8 +3,9 @@ import { Layout, Text, Page } from '@vercel/examples-ui'
 import { Button, Chip, Container, MenuItem, TextField, Typography, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import { Chat } from '../components/Chat'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Prompts from '../components/Prompts';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles({
   root: {
@@ -28,11 +29,16 @@ const useStyles = makeStyles({
 });
 
 function Home() {
-  
   const [prompt, setPrompt] = useState("");
+  const [params, setParams] = useState({});
 
+  const router = useRouter();
   const classes = useStyles();
   
+  useEffect(() => {
+    setParams(router.query);
+  }, [router.query]);
+
   return (
     <div className={classes.root}>
       <section className="flex flex-col gap-2" style={{textAlign: 'center', marginBottom: "32px" }}>
@@ -43,7 +49,7 @@ function Home() {
       </section>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Prompts updatePrompt={setPrompt}/>
+          <Prompts updatePrompt={setPrompt} params={params} setParams={setParams}/>
         </Grid>
         <Grid item xs={6}>
           <Container>

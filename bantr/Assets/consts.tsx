@@ -87,11 +87,11 @@ export const Moods = [
 // make an array of objects for the quirks
 export const Quirks = [
   {
-    value: 'Cat Lover',
+    value: 'cat_lover',
     label: 'Cat Lover',
   },
   {
-    value: 'Dog Lover',
+    value: 'dog_lover',
     label: 'Dog Lover',
   },
   {
